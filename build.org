@@ -1,0 +1,82 @@
+#+TITLE: BULDING THE EXPERIMENTS
+
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| EXPERIMENT          | SOURCE (ELM, JS)                                  | SOURCE (HTML)      | TARGET (JS)           |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Shuffle             | Shuffle.elm                                       | shuffle.html       | shuffle.js            |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Merge Strategy      | MergeStrategy.elm                                 | mergeStrategy.html | mergeStrategy.js      |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Merge Algorithm     | MergeAlgo.elm                                     | mergeAlgo.html     | mergeAlgo.js          |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Merging Sublists    | MergeSublists.elm                                 | mergeSublists.html | mergeSublists.js      |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Mergesort Recursive | MergeSortRecursive.elm, mergeSortRecursiveInit.js | recursive.html     | mergeSortRecursive.js |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Mergesort Arbitrary | MsArbitrary.elm, msArbitraryInit.js               | msArbitrary.html   | mergeSortArbitrary.js |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
+
+
+To build all the experiments run the following command:
+
+#+BEGIN_SRC sh
+make all
+#+END_SRC
+
+
+* Building Each Experiment
+The follwing make commands are used to build all the experiments
+individually along with a command to build all the experiments.
+
+
+#+BEGIN_SRC makefile :tangle ./makefile
+  shuffle: 
+	  elm make src/Shuffle.elm --output dist/js/shuffle.js
+
+  merge-strategy:
+	  elm make src/MergeStrategy.elm --output dist/js/mergeStrategy.js
+
+  merge-algo:
+	  elm make src/MergeAlgo.elm --output dist/js/mergeAlgo.js
+
+  merge-sublists:
+	  elm make src/MergeSublists.elm --output dist/js/mergeSublists.js
+
+  ms-recursive:
+	  elm make src/MergeSortRecursive.elm --output dist/js/mergeSortRecursive.js
+
+  ms-arbitrary:
+	  elm make src/MsArbitrary.elm --output dist/js/mergeSortArbitrary.js
+
+  webpack:
+	  npm run build
+
+  css:
+	  cp -r src/css dist/
+
+  html:
+	  cp -r src/html/* dist/
+
+  js:
+	  mkdir -p dist/js
+
+  dist:
+	  mkdir -p dist
+
+  init: dist js css html
+
+  all: init webpack shuffle merge-strategy merge-algo merge-sublists ms-recursive ms-arbitrary
+
+  elm: shuffle merge-strategy merge-algo merge-sublists ms-recursive ms-arbitrary
+#+END_SRC
+
+* HOSTING
+
+Copy the contents of the =dist/= directory into the appropriate
+[[https://github.com/vlab-exp/vlab-exp.github.io/tree/master/mergesort][location]] in the [[https://github.com/vlab-exp/vlab-exp.github.io][vlab-exp]] repository on github.
+
+Make sure that the html filenames do not change.  The links to these
+html files have been shared publically and should not stop working
+suddenly.
+
+

@@ -1,0 +1,196 @@
+#+TITLE: Merge-Sort And Search Experiments Report
+
+* Overview
+  The mergesort experiments and the Search experiment has been
+  developed according to the transition system based learning
+  pedagogy. The experiments introduce the key concepts of Merge-Sort
+  and Binary Search incrementally, by adding a new concept on the top
+  of the previous knowledge. The following document describes the
+  implementation approach for each sub experiment. The design and
+  requirement documents are present here
+
+  |------------+------------------------+-----------------|
+  | Experiment | Requirements Document  | Design Document |
+  |------------+------------------------+-----------------|
+  | Merge-Sort | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/requirements.org][Link]]                   | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/design.org][Link]]            |
+  | Search     | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/search/-/blob/master/search-requirements.org][Link]]                   | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/search/-/blob/master/design.org][Link]]            |
+  |------------+------------------------+-----------------|
+
+  
+* Merge Sort
+  The merge sort experiment consists of the following sub experiments  
+
+  |----------------------+------------------------+-----------|
+  | Experiment Name      | Source Code            | Live Link |
+  |----------------------+------------------------+-----------|
+  | Shuffle Experiment   | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/src/Shuffle.elm][Shuffle.elm]]            | [[http://algodynamics.io/mergesort/merge/mergesystem][Link]]      |
+  | Merge Strategy       | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/src/MergeStrategy.elm][MergeStrategy.elm]]      | [[http://algodynamics.io/mergesort/merge/msStrategy][Link]]      |
+  | Merge Algorithm      | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/src/MergeAlgo.elm][MergeAlgo.elm]]          | [[http://algodynamics.io/mergesort/merge/msAlgo][Link]]      |
+  | Merging Sub-lists    | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/src/MergeSublists.elm][MergeSublists.elm]]      | [[http://algodynamics.io/mergesort/merge][Link]]      |
+  | Recursive Merge-Sort | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/src/MergeSortRecursive.elm][MergeSortRecursive.elm]] | [[http://algodynamics.io/mergesort/recursive][Link]]      |
+  | Arbitrary Merge-Sort | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/merge-sort/-/blob/master/src/MsArbitrary.elm][MsArbitrary.elm]]        | [[http://algodynamics.io/mergesort/msarbitrary][Link]]      |
+  |----------------------+------------------------+-----------|
+
+** Some Primitives
+   - =head lst= : It gives the first element of a list =lst=.
+  
+    
+** Shuffle Experiment
+   The shuffle experiment introduces the concept of the shuffle
+   operation. The =shuffle= operation is defined as
+
+*** Shuffle Operation
+    The shuffle operation takes two lists and returns a combined list.
+    The combined list is called shuffled list.  At each step of
+    =shuffle= operation, the system picks the =head= of any of the two
+    lists, and remove the picked element from the associated list. The
+    picked element is then placed at the end of the result list.
+
+    The user is allowed to select which list's head should be chosen
+    at each step, by clicking the 'LEFT' and the 'RIGHT'
+    buttons. Clicking the buttons, the system executes one step of
+    shuffle operation.
+
+** Merge Strategy
+   The merge experiment introduces the concept of =merge= operation as
+   a special case of =shuffle= operation. In the =shuffle= operation,
+   there was no constraint on, which list's =head= element is
+   picked. The =merge= operation is defined as
+   
+*** =Merge= Operation
+    The merge operation takes two lists and gives a combined list. The
+    combined list is called "Merged List". At each step of =merge=
+    operation, the system picks the =head= of that list, which has a
+    lower =head= value, and remove the picked element from the
+    associated list.The picked element is placed at the end of result
+    list.For example
+
+#+BEGIN_EXAMPLE
+LEFT = [27,19,22,28,37,30]
+RIGHT = [37,15]
+first step of (merge LEFT RIGHT) = [27]
+first step of (shuffle LEFT RIGHT) = [27] or [37] {depends on the button clicked}
+#+END_EXAMPLE
+
+   This incremental definition of =merge= operation helps in
+   reinforcing the student's knowledge of =shuffle= operation and also
+   gives a comparative difference between both the operations.
+
+   Doing this experiment a couple of times can often lead to a new
+   observation that, if the =merge= operation is applied on sorted
+   lists, then the merged list is also sorted.
+
+** Merge Algorithm
+
+   This experiments automates the =merge= operation, i.e. user is just
+   expected to observe the =merge= operation on both the Lists while
+   clicking a single button "NEXT". Another difference is that both
+   the lists are sorted, this introduces the result that
+
+#+BEGIN_QUOTE
+Application of =merge= operation on two sorted lists, gives a sorted
+list.
+#+END_QUOTE
+
+   in case the user had not observed it in the previous experiment.
+
+** Merging Sub-lists
+   The merge operation is now seen as a primitive, and the
+   intermediate steps are not shown to the user. This experiments asks
+   the user to sort an entire list, using the repetitive application
+   of =merge= operations. The given exercise forces the user to
+   analyse, how to use the established result "Application of =merge=
+   operation on two sorted lists, gives a sorted list." to his
+   advantage. This incremental rise in learning, gives an idea that
+   repetitive application of =merge= operation can be used for
+   sorting. The user may observe the pattern that, if we start
+   applying the =merge= operation, after each iteration, the longest
+   sorted sub-list is growing longer.
+
+** Recursive Merge-Sort
+   The recursive merge-sort, takes the experiment a step further, now
+   the user is shown that there exists a recursive sub-problem, when
+   we sort using the merge sort. The user starts sorting the whole
+   list, by applying merge-sort. This experiment introduces that, the
+   problem of sorting the entire list can be broken as
+   - Splitting the list into two sub-lists 
+   - Sorting the two sub-lists
+   - Applying the =merge= Operation
+
+   This recursive structure, then establishes the connection
+   between the repetitive merging operation to sort the List, and the
+   recursive merging operation to sort the list.
+
+** Arbitrary Merge-Sort
+   The arbitrary merge-sort gives a glimpse into advanced thinking
+   that the =merge= operation can also be applied on sorted sub-lists
+   from different Merge-Sort calls. This reinforces the key idea that
+   sorting happens because of the =merge= operation on sorted list and
+   it does not depend on the order in which the lists are generated.
+
+* Search Experiment
+
+  The search  experiment consists of the following sub-experiments
+
+  |-----------------------------------+------------------------------+-----------|
+  | Experiment Name                   | Source Code                  | Live Link |
+  |-----------------------------------+------------------------------+-----------|
+  | Random Search With Replacement    | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/search/-/blob/master/src/RandomWithReplacement.elm][RandomWithReplacement.elm]]    | [[https://vlab-exp.github.io/search/RandomWithReplacement.html][Link]]      |
+  | Random Search Without Replacement | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/search/-/blob/master/src/RandomWithoutReplacement.elm][RandomWithoutReplacement.elm]] | [[https://vlab-exp.github.io/search/RandomWithoutReplacement.html][Link]]      |
+  | Linear Search                     | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/search/-/blob/master/src/LinearSearch.elm][LinearSearch.elm]]             | [[https://vlab-exp.github.io/search/LinearSearch.html][Link]]      |
+  | Binary Search                     | [[https://gitlab.com/vxcg/res/cse/algodynamics/demos/search/-/blob/master/src/BinarySearch.elm][BinarySearch.elm]]             | [[https://vlab-exp.github.io/search/BinarySearch.html][Link]]          |
+  |-----------------------------------+------------------------------+-----------|
+  
+** Random Search With Replacement
+   This experiment introduces the problem statement i.e. To search for
+   a target element in a unsorted List". The user is given the hint to
+   implement the most primitive method of searching i.e. randomly
+   picking an element. There is an additional condition that the user
+   does not keep track of the elements he has picked, making this
+   problem similar to search for a ball in a bag. This procedure takes
+   indefinite amount of time. Since the user can re-pick an element as
+   the element are not visible after they are unpicked by the user.
+
+   This introduces two important lessons for the user
+   - The strategy is inefficient, as we are randomly picking the
+     elements.
+   - The strategy is non terminating, as we will never stop searching for
+     the element, because we do not keep track of picked elements.
+
+** Random Search Without Replacement
+   This experiment is similar to "Random Search With Replacement". The
+   user is allowed to pick the elements at random, but now he is also
+   allowed to keep track of the elements he has picked. This
+   relaxation in constraints helps the user to notice that, the
+   strategy for searching has become terminating, unlike the previous
+   experiment. The user can also conclude that, he is expected to
+   arrive at a conclusion that the target element is present or not in
+   at most $O(N)$ time.
+
+   If in case the user starts picking element from left to right, then
+   he might discover the Linear Searching strategy.
+
+** Linear Search
+   The linear search models the next improvement, which is instead of
+   picking elements randomly the user picks them in order from left to
+   right. This experiment introduces the concept of linear scanning if
+   in case he has missed observing this in the previous
+   experiment. This new approach also allows the user to realise the
+   following
+   - This strategy is more efficient than the previous two, because no
+     time is wasted in selecting a random index.
+   - This strategy is also terminating i.e. has a definite time
+     duration, after which the result is declared to be found or not found.
+   
+** Binary Search
+   In all the previous experiments, the list from which the target
+   element is to be found was unsorted. But this experiment,
+   introduces a new problem to the user i.e. how to search for an
+   element, more efficiently in a sorted List. This incremental
+   rise in the problem statement ensures that previous knowledge is
+   connected to the currently taught new concepts. The intermediate
+   comments ensures that user utilizes the given information (sorted
+   list, and target element) to his advantage. If the user follows the
+   instructions correctly, then he may observe that it took him at most
+   $O(\log{n})$ time to search for the element.
+

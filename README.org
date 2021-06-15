@@ -1,0 +1,18 @@
+#+TITLE: ALGODYNAMICS: MERGESORT
+
+* INTRODUCTION
+This repository contains sources for all the mergesort related
+algodynamics experiments.
+
+* BUILDING THE EXPERIMENTS
+Details regarding the build process of all the experiments can be
+found [[file:build.org][here]].
+
+* REQUIREMENTS
+The requirements document listing the requirements for all the
+experiments can be found [[file:requirements.org][here]].
+
+* DESIGN
+The design documents describe the high level details of each
+experiment.  Links to the design docuent for each experiment is listed
+in the following [[file:design.org][document]].

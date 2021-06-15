@@ -1,0 +1,30 @@
+{
+  "name": "mergesort",
+  "version": "1.0.0",
+  "description": "Merge Sort Experiment.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "recursive": "elm make src/Dagre.elm --output dist/dagre-elm.js",
+    "arbitrary": "elm make src/MsArbitrary.elm --output dist/ms-arbitrary.js",
+    "msortalgo": "elm make src/MergeSortAlgo.elm --output dist/mergeSortAlgo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/vlead-projects/experiments/js-lib/elm/mergesort.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/vlead-projects/experiments/js-lib/elm/mergesort/issues"
+  },
+  "homepage": "https://gitlab.com/vlead-projects/experiments/js-lib/elm/mergesort#readme",
+  "devDependencies": {
+    "cytoscape": "^3.16.2",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "dagre": "^0.8.5",
+    "webpack": "^5.4.0"
+  }
+}

@@ -1,0 +1,12 @@
+#+title: Mergesort Language
+
+* Grammar
+
+#+BEGIN_SRC bnf
+<exp> ::= <array>
+        | <function>
+
+<function> ::= <primitive>
+             | <composite> <exp>	   
+#+END_SRC
+

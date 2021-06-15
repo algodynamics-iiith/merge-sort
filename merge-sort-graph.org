@@ -1,0 +1,78 @@
+#+title: Graph to represent the Merge Sort System
+
+* Nodes
+
+There are two types of nodes: /OpNode/ and /DataNode/.  An /OpNode/
+represents function application whereas /DataNode/ represents data.
+Mergesort is a sorting algorithm, so the data in this case is a list
+of values.
+
+#+NAME: node
+#+BEGIN_SRC elm
+type Node 
+    = OpNode Op 
+    | DataNode Data
+#+END_SRC
+
+** OpNode
+   
+An /OpNode/ represents function application.  Source nodes of each
+incoming edge of an /OpNode/ represent the inputs to the function.
+Target node of the outgoing edge represents the output of the
+function.
+
+#+NAME: op
+#+BEGIN_SRC elm
+type Op 
+    = MS 
+    | Split
+    | Merge
+#+END_SRC
+
+** DataNode
+
+A /DataNode/ represents data.  For a mergesort system, data is a list
+of comparable values.
+
+#+NAME: data
+#+BEGIN_SRC elm
+  type alias Data = List Int
+#+END_SRC
+
+
+* Edge
+
+An edge is defined by the source and target nodes and a label.  In our
+graph, the edges are unlabelled.
+
+=NoLabel= variant of the =EdgeLabel= type represents the label for a
+graph with unlabelled edges.  This can be extended with additional
+variants later of we want to give some labels.
+
+#+NAME: edge-label
+#+BEGIN_SRC elm
+type EdgeLabel = NoLabel
+#+END_SRC
+
+* Graph
+
+The =Node= type defined above is used as a label for the graph.  We
+use the graph definition from [[https://package.elm-lang.org/packages/elm-community/graph/6.0.0/][this package]].
+
+#+NAME: graph
+#+BEGIN_SRC elm
+type alias MSGraph 
+    = Graph 
+        (Graph.Node Node) 
+        (Graph.Edge EdgeLabel)
+#+END_SRC
+
+* Layout Graph
+
+The layout graph data structure contains layout information for
+visualizing the graph.  This acts as an adaptor between the internal
+graph data structure and the graph object required by the layout api.
+
+We use the [[https://github.com/dagrejs/dagre/wiki][dagrejs]] package for generating layout for the graph.
+
+

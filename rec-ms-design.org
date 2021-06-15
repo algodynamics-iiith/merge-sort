@@ -1,0 +1,125 @@
+#+TITLE: RECURSIVE MERGESORT EXPERIMENT: DESIGN DOCUMENT
+
+* INTRODUCTION
+This document describes the design for the recursive mergesort
+experiment.  The requirements for thie experiment can be found in the
+requirements document.
+
+
+* INTERFACE AND INTERACTIONS
+The interface for the recursive merge experiment consists of a
+directed acyclic graph that represents the steps in the recursive
+split and merge operations in the mergesort algorithm.
+
+The graph has the following properties:
+
+** Nodes
+
+- Function Node :: nodes that represent functions.  Source nodes of a
+                   function node represent inputs to the function and
+                   target node represents output of the function.
+
+  + Applied Function Node :: Function whose result has been evaluated
+       and is stored in the target of the outgoing nodes.
+
+  + Applicable Function Node :: Function that has not been evaluated.
+       Such a function node has no outgoing edge.
+  
+  + Composite Function :: Function that is a composition of other
+       functions.  A composite function node can be expanded using an
+       expansion rule that is specific to the function.
+
+  + Primitive Function :: Primitive function.  Primitive function
+       nodes cannot be expanded.
+
+- Data Node :: nodes that represent data (arrays).
+
+
+** Mapping of node type to visual representation
+
+#+CAPTION: Visual Representations of Different Types of Function Nodes
+[[file:img/node-types.png][file:img/node-types.png]]
+
+
+#+CAPTION: visual-mapping
+|--------------------------+----------------------------+---------------+-----------+-----------|
+| Node Type                | Visual Representation      | Text          | Box (T/F) | Box Color |
+|--------------------------+----------------------------+---------------+-----------+-----------|
+| Data Node                | None. Only values as text. | values        | F         | NA        |
+|--------------------------+----------------------------+---------------+-----------+-----------|
+| Applied Function Node    | Box with function name.    | function name | T         | default   |
+|--------------------------+----------------------------+---------------+-----------+-----------|
+| Applicable Function Node | Box with function name.    | function name | T         | default   |
+|--------------------------+----------------------------+---------------+-----------+-----------|
+| Composite Function Node  | Box with function name.    | function name | T         | =CBX_C=   |
+|--------------------------+----------------------------+---------------+-----------+-----------|
+| Primitive Function Node  | Box with function name.    | function name | T         | =CBX_P=   |
+|--------------------------+----------------------------+---------------+-----------+-----------|
+
+*NOTE* : color names are placeholders for color codes.  Colors
+seens in the diagrams in this document may not match those in the
+actual working system.
+
+
+** Initial
+
+Initially the following elements are visible on the screen:
+
+- Input array :: The array that we want to sort.
+- MS Function Node :: A clickable box that represents the *Mergesort* operation.
+
+[[file:img/split-n-merge-init.png][file:img/split-n-merge-init.png]]
+
+The MS function node is =Applicable= as well as =Composite=.  Hence
+two interactions are possible here.
+
+*Possible Interactions:*
+
+- 1. Expand :: Expand the MS node.
+- 2. Apply :: Apply mergesort function to the incoming array.
+
+Here we see the scenario where the MS node is expanded first in step 1
+and then in the resulting graph, we apply the merge function.
+
+
+** Expand MS box
+
+[[file:img/split-n-merge-click-ms.png][file:img/split-n-merge-click-ms.png]]
+
+
+The user can click on the MS box.  This corresponds to the MS expansion
+rule:
+
+#+CAPTION: ms-expansion-rule
+#+BEGIN_SRC bnf
+  [(a -> ms)] ::= [ ( a -> split -> a1, a2 ),
+		    ( a1 ->  ms -> a1' ),
+		    ( a2 ->  ms -> a2' ),
+		    ( (a1', a2') -> merge )
+		  ]
+#+END_SRC
+
+_Notation_:
+
+- (n, ...) -> m = many-to-one edge. *source nodes* => (n, ...), *target node* => m
+- n -> (m, ...) = one-to-many edge. *source node* => n, *target nodes* => (m, ...)
+- [(n, ... -> m, ...), ...] -> List of edges.
+- x -> y = edge from node x to node y.
+- a = input array node
+- ms = merge sort function node
+- a' = sort(a)
+- a1 = sublist(a, 0, size(a)/2)
+- a2 = sublist(a, size(a)/2, size(a))
+
+
+** Merge
+
+[[file:img/split-n-merge-click-merge.png][file:img/split-n-merge-click-merge.png]]
+
+The =Merge= node is a *primitive* node.  This implies that it cannot
+be expanded.  Hence the only action one can perform on a =Merge= node
+is function application (if the node is *applicable*).
+
+In the example shown the above figure, the =Merge= node is
+*applicable*, so clicking on that node gives the result of applying
+merge on the incoming arrays.

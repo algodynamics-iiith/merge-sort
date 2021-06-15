@@ -1,0 +1,43 @@
+#+title:  Interim Report on the Mergesort experiment 
+#+author: Venkatesh Choppella
+#+date: [2021-05-21 Fri]
+
+* Introduction
+
+This is an interim report on the prototype development of a
+sequence of five interactive experiments demonstrating the
+incremental design of the mergesort algorithm.  
+
+
+Mergesort is an algorithm for sorting a list.  For
+convenience, we work with a list of numbers.  An
+implementation of the mergesort algorithm in Python is given
+below:
+
+
+
+
+The merge sort implementation consists of a list of
+experiments given in Table~\ref{tbl-ms-exp}.  For each
+experiment, we discuss the motivation, goal and the key
+strategies driving the experiment, alongwith an explanation
+of the interactions.
+
+#+name: tbl-ms-exp
+#+caption:  Mergesort experiments and live links
+|----------------------+-----------|
+| Experiment Name      | Live Link |
+|----------------------+-----------|
+| Shuffle Experiment   | [[http://algodynamics.io/mergesort/merge/mergesystem][Link]]      |
+| Merge Strategy       | [[http://algodynamics.io/mergesort/merge/msStrategy][Link]]      |
+| Merge Algorithm      | [[http://algodynamics.io/mergesort/merge/msAlgo][Link]]      |
+| Merging Sub-lists    | [[http://algodynamics.io/mergesort/merge][Link]]      |
+| Recursive Merge-Sort | [[http://algodynamics.io/mergesort/recursive][Link]]      |
+| Arbitrary Merge-Sort | [[http://algodynamics.io/mergesort/msarbitrary][Link]]      |
+|----------------------+-----------|
+
+
+
+
+
+

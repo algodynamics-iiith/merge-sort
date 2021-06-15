@@ -1,0 +1,110 @@
+#+TITLE: SHUFFLE EXPERIMENT: DESIGN DOCUMENT
+
+* INTRODUCTION
+This document describes the design for the shuffle experiment.  The
+requirements for thie experiment can be found in the requirements
+document.
+
+
+* INTERFACE
+The user interface for the shuffle experiment consists of the
+following:
+
+- arrays :: There are three arrays present in the interface.  One
+            array for the final result of the shuffling operation and
+            two called =Left= and =Right= for the inputs to the
+            shuffle operation.
+
+- buttons :: There are two buttons.
+  + LEFT Button :: The LEFT button is used to pick the first element
+    from the =Left= array and place it at the end of the result array.
+
+  + RIGHT Button :: The Right button is used to pick the first element
+    from the =Right= array and place it at the end of the result array.
+
+** Sorting status of the arrays
+Each array in the system is either sorted or unsorted.  This sorting
+status of the array is indicated by the background color of the array.
+
+- Unsorted :: If the array is unsorted it will have a red background
+              color.
+
+- Sorted :: If the array is sorted it will have a green background
+            color.
+
+
+* INTERACTIONS
+The shuffle experiment consists of the following interactions:
+
+- Pick an element from one of the input arrays
+
+The next section describes this interaction in detail.
+
+** Pick an element from one of the input arrays
+There are two input arrays =Left= and =Right= in this experiment
+setup.  The user has to move all the elements from each of these
+arrays into the initially empty =Result= array.  The user has two
+buttons to do this.  The =LEFT= button and the =RIGHT= button.
+
+As described in the interface section, the =LEFT= button picks the
+first element from the =Left= array and places it at the end of the
+=Result= array.  The =RIGHT= button is similar.
+
+When we pick an element from one of the input arrays and place it in
+the =Result= array, that corresponding element is removed from the
+input array.
+
+For example, consider the following setting:
+
+#+BEGIN_EXAMPLE
+LEFT = [10, 40, 50, 8]
+
+RIGHT = [9, 3, 7]
+
+RESULT = []
+#+END_EXAMPLE
+
+If we click on the =RIGHT= button, the system results in the following
+state:
+
+#+BEGIN_EXAMPLE
+LEFT = [10, 40, 50, 8]
+
+RIGHT = [3, 7]
+
+RESULT = [9]
+#+END_EXAMPLE
+
+Observe that the =Right= array goes from =[9, 3, 7]= to =[3, 7]= and
+the =RESULT= array goes from =[]= to =[9]=.
+
+
+** The final state of the system
+Due to the terminating nature of the system, there is always a limited
+number of interactions possible that change the state of the system.
+The final state of the system is reached when all the elements from
+both the =Left= and =Right= arrays have moved to the =Result= array.
+
+For example, one of the possible final state of the system in the
+example above can be as follows:
+
+#+BEGIN_EXAMPLE
+LEFT = []
+
+RIGHT = []
+
+RESULT = [9, 10, 40, 50, 8, 3, 7]
+#+END_EXAMPLE
+
+This is only one of the possible final states. There can be several
+possible final states because the final state is determined only by
+the length of the =Left=, =Right= and =Result= arrays and not the
+contents of the =Result= array (which can vary depending on the order
+of interactions).
+
+The following conditions should be satisfied for the system to be in
+the final state:
+
+- =Left= and =Right= arrays should be empty.
+- length of =Result= = initial length of =Left= + initial length of
+  =Right=.

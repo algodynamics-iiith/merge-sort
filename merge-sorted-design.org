@@ -1,0 +1,28 @@
+#+TITLE: SORTED-MERGE EXPERIMENT: DESIGN DOCUMENT
+
+* INTRODUCTION
+This document describes the design for the sorted-merge experiment.
+The requirements for thie experiment can be found in the requirements
+document.
+
+
+* INTERFACE
+The interface of the sorted-merge experiment is similar to the
+unsorted merge experiment because the sorted merge experiment is a
+special case of the unsorted merge experiment.
+
+There is functionally no difference between the sorted-merge and
+unsorted-merge experiments.  The only difference is that the =Left=
+and =Right= arrays are gaurenteed to be sorted.
+
+Due to the nature of the system, it is implied that the =Result= array
+will also be always sorted.  So, none of the arrays will ever be
+unsorted in this experiment.
+
+
+* INTERACTIONS
+The interactions in this experiment as exactly the same as that in the
+unsorted-merge experiment.  Only the results of these interactions
+differ in the fact that the resulting array in this experiment will
+always be sorted whereas in the unsorted-merge experiment if the
+resulting array is sorted it is only by coincidence.

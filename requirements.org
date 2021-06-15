@@ -1,0 +1,134 @@
+#+TITLE: Merge Sort Requirements
+
+* Introduction
+This document describes the requirements for mergesort experiments.
+
+* Experiments
+
+** Shuffle
+
+*** Objective
+The objective of this experiment is to introduce the concept of
+"shuffling" two arrays to make a larger array.
+
+*** Learning Outcomes
+The user should be able to learn the following after performing this
+experiment:
+
+- 1. The basic operation of shuffling :: 
+     The user should be able to identify that in order to shuffle two
+     arrays the items in the array need to comparable and that
+     repeated application of shuffling items from two arrays, leads to
+     a larger array containing items from both sub-arrays.
+
+- 2. Preconditions for shuffling ::
+     There is no precondition to shuffling.  Any two arrays can be
+     shuffled together to form a new array.
+
+- 3. Properties of resulting array ::
+     The number of items in the resulting array is equal to the sum of
+     items in both the sub-arrays.
+
+
+** Merge Unsorted Lists
+
+*** Objective
+The objective of this experiment is to introduce the concept of
+"merging" two lists and to demonstrate that merging is a special case
+of shuffling.
+
+*** Learning Outcomes
+The user should be able to learn the following from this experiment:
+
+- 1. Merging two lists ::  Given two lists (sorted or unsorted) the
+     user should be able to perform the merging operation to generate
+     a new list containing all the elements from both the lists.
+
+- 2. Difference between Shuffing and Merging :: The user should be
+     able to identify the fact that merging is a shuffling with an
+     additional constraint.  The user should be able to understand the
+     difference and perform merging using the shuffling interface.
+
+- 3. Merging unsorted lists does not generate a sorted list :: The
+     user should understand the fact that merging can only be used to
+     generate a sorted list, if the two lists being merged are sorted.
+     If any of the list is not sorted, the resulting list will not be
+     sorted.
+
+
+** Merge Sorted Lists
+
+*** Objective
+The objective of this experiment is to demonstrate to the user that
+merging two sorted lists results in another sorted list containing all
+the elements from the two given lists.
+
+*** Learning Outcomes
+The user should be able to learn the following from this experiment:
+
+- 1. Merging two sorted lists results in a sorted list :: The user
+     should be able to understand that given two sorted lists,
+     performing merge operation on these lists results in a sorted
+     list.
+
+- 2. The resulting list is sorted at each step :: The merging
+     operation is performed by comparing two elements from the input
+     lists and picking the correct element according to the merge
+     criteria.  The user should be able to observe the fact that the
+     resulting list is sorted after each new addition to the new list.
+
+
+** Merge Sublists
+
+*** Objective
+The objective of this experiment it to demonstrate to the user that is
+possible to sort a list by repeatedly merging adjacent sorted
+subarray.
+
+*** Learning Objectives
+
+
+
+** Recursive Mergesort
+
+*** Objective
+The objective of this experiment is to demonstrate the recursive
+nature of the mergesort algorithm by allowing the user to view the
+recursive substructures that emerge from the split and merge
+operations.
+
+*** Learning Outcomes
+The user should be able to learn the following from this experiment: 
+
+- 1. Mergesort is a recursive algorithm ::
+
+- 2. Different operations and their sequence of execution ::
+
+
+** Recursive Arbitrary Mergesort
+
+*** Objective
+The objective of this experiment is to demonstrate to the user that
+the sequence of operations involved in performing mergesort is not
+unique.  It is possible to arbitrarity select the sequence of
+operations according to certain rules and conditions.
+
+*** Learning Outcomes
+
+The user should be able to learn the following from this experiment:
+
+- 1. Multiple ways to sort using split and merge ::  There are several
+     ways to sort a given list using the split and merge operations.
+     The user should be able to understand the fact that they are free
+     to perform the splitting and merging operations in any order that
+     does not violate the rules for spliting and merging and they will
+     still get a sorting list.
+
+- 2. Conditions for split and merge :: The user should be able to
+     understand the conditions necessay for splitting a list and
+     merging two lists.
+
+- 3. Difference between arbitrary merging and mergesort :: The user
+     should be able to understand the fact that the mergesort
+     algorithm enforces a specific ordering on the splitting and
+     merging of sublists in order to automate the process.
