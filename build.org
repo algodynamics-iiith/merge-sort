@@ -70,13 +70,14 @@ individually along with a command to build all the experiments.
   elm: shuffle merge-strategy merge-algo merge-sublists ms-recursive ms-arbitrary
 #+END_SRC
 
+* RUNNING
+  1. cd dist/
+  2. Start a local web server (may be via  ~python3 -m http.server~)
+  3. Visit [[http://localhost:8000/index.html]].
+
 * HOSTING
 
 Copy the contents of the =dist/= directory into the appropriate
-[[https://github.com/vlab-exp/vlab-exp.github.io/tree/master/mergesort][location]] in the [[https://github.com/vlab-exp/vlab-exp.github.io][vlab-exp]] repository on github.
-
-Make sure that the html filenames do not change.  The links to these
-html files have been shared publically and should not stop working
-suddenly.
+location.
 
 
