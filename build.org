@@ -5,6 +5,8 @@
 |---------------------+---------------------------------------------------+--------------------+-----------------------|
 | Shuffle             | Shuffle.elm                                       | shuffle.html       | shuffle.js            |
 |---------------------+---------------------------------------------------+--------------------+-----------------------|
+| Shuffle(Sorted)     | ShuffleSorted.elm                                 | shuffleSorted.html | shuffleSorted.js      |
+|---------------------+---------------------------------------------------+--------------------+-----------------------|
 | Merge Strategy      | MergeStrategy.elm                                 | mergeStrategy.html | mergeStrategy.js      |
 |---------------------+---------------------------------------------------+--------------------+-----------------------|
 | Merge Algorithm     | MergeAlgo.elm                                     | mergeAlgo.html     | mergeAlgo.js          |
@@ -32,6 +34,9 @@ individually along with a command to build all the experiments.
 #+BEGIN_SRC makefile :tangle ./makefile
   shuffle: 
 	  elm make src/Shuffle.elm --output dist/js/shuffle.js
+
+  shuffle-sorted: 
+	  elm make src/ShuffleSorted.elm --output dist/js/shuffleSorted.js
 
   merge-strategy:
 	  elm make src/MergeStrategy.elm --output dist/js/mergeStrategy.js
